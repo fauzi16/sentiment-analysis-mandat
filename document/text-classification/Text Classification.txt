@@ -1,4 +1,4 @@
-Link Youtube dengan - Naive Bayes
+Data Collection dari Youtube Comment menggunakan HTML Extraction.
 
 1. Indonesia Mulai Terlalu "Dalam" Mengikuti Konflik Rusia-Ukraina, Apa Dampaknya? | AKIM tvOne
 A. Link: https://www.youtube.com/watch?v=jjhkeKUiVhU&t=189s
@@ -7,6 +7,8 @@ Jokowi meminta menghentikan perang tetapi tidak menyebut atau menunjukkan nama n
 C. Channel: tvOneNews - 7,93 jt subscriber
 D: Narasumber: Hikmahanto Juwana, Guru Besar Hukum Internasional Universitas Indonesia.
 E. Tendensi Narasumber: Kontra
+F. Jumlah data: 2163
+G. Jumlah data dengan comment lebih besar dari 100 karakter: 888
 
 2. RUSIA LAWAN UKRAINA, INDONESIA LAWAN... NETIZEN 😉 -MENLU RESMI BICARA- Deddy Corbuzier Podcast
 A. Link: https://www.youtube.com/watch?v=ZEpuYGanK0Y&t=308s
@@ -14,6 +16,8 @@ B. Description:
 C. Channel: Deddy Corbuzier - 18,6 jt subscriber
 D: Narasumber: Retno Marsudi - Menteri Luar Negeri Indonesia
 E. Tendensi Narasumber: Pro
+F. Jumlah data: 2631
+G. Jumlah data dengan comment lebih besar dari 100 karakter: 1338
 
 3. Menakar Sikap Setuju RI di Resolusi PBB Soal Invasi Rusia
 A. Link: https://www.youtube.com/watch?v=vsvpo6O7ZW8
@@ -21,6 +25,9 @@ B. Description: Majelis umum Perserikatan Bangsa-bangsa (PBB) menggelar voting t
 C. Channel: CNN Indonesia - 9,15 jt subscriber
 D: Narasumber: Hikmahanto Juwana, Guru Besar Hukum Internasional Universitas Indonesia.
 E. Tendensi Narasumber: Kontra
+F. Jumlah data: 1822
+G. Jumlah data dengan comment lebih besar dari 100 karakter: 706
+
 
 4. Invasi Rusia Akankah Menyulut PD III?
 A. Link: https://www.youtube.com/watch?v=AKQbeuf0SAQ
@@ -28,6 +35,8 @@ B. Description: Konflik yang meningkat antara Rusia dan Ukraina kini menyita per
 C. Channel: CNN Indonesia - 9,15 jt subscriber
 D: Narasumber: Dr. Connie Rahakundini Bakrie, M.Si. Akademisi Universitas Pertahanan Indonesia.
 E. Tendensi Narasumber: Kontra
+F. Jumlah data: 1955
+G. Jumlah data dengan comment lebih besar dari 100 karakter: 737
 
 Pembagian Tugas:
 Minimum Amount : 2000 Comment (500 per-link)@All / 500 Comment (125 per-link)@Person

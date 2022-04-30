@@ -11,26 +11,28 @@ public class DataCollectionParser {
     private static final String NUMBER_REGEX = "\\d+";
 
     public static void main(String[] args) throws FileNotFoundException {
-        String fileLocation = "../document/text-classification/3.txt";
+        String fileLocation = "../document/text-classification/4.txt";
         DataCollectionParser parser = new DataCollectionParser(fileLocation);
         List<UserComment> extractInformation = parser.extractInformation();
         int commentThatMoreThan100Char = 0;
         
         for (UserComment userComment : extractInformation) {
             String comment = userComment.getComment().toString();
-            System.out.println(userComment.getUsername() + " - " + comment);
-            System.out.println();
+            
             if(comment.length() > 100){
+                System.out.println(userComment.getUsername() + " - " + comment);
+                System.out.println();
                 commentThatMoreThan100Char++;
             }
         }
 
-        System.out.println("Total Jumlah data: " + extractInformation.size());
-        System.out.println("Total Jumlah data dengan comment lebih besar dari 100: " + commentThatMoreThan100Char);
+        System.out.println("F. Jumlah data: " + extractInformation.size());
+        System.out.println("G. Jumlah data dengan comment lebih besar dari 100 karakter: " + commentThatMoreThan100Char);
     }
 
     private String fileLocation;
     private int emptyLineStreak = 0;
+    private int sectionLine = 0;
 
     
     public DataCollectionParser(String fileLocation) {
@@ -60,6 +62,7 @@ public class DataCollectionParser {
 
         while (sc.hasNextLine()){
             String lineString = sc.nextLine();
+            sectionLine++;
             
             // detecting if this is new section comment
             if(lineString == null || lineString.isEmpty()) {
@@ -76,13 +79,14 @@ public class DataCollectionParser {
                 prevLine = null;
                 userComment = new UserComment(username, new StringBuilder());
                 results.add(userComment);
-            } else if (lineString.startsWith("1 bulan yang lalu")) {
-                // ini adalah bagian dari waktu dimana comment di buat
+                sectionLine = 2;
+            } else if (sectionLine == 3) {
+                // ini adalah bagian dari waktu dimana comment dibuat
                 continue;
-            } else if (lineString.length() < 4 && lineString.matches(NUMBER_REGEX)) {
-                // ini adalah data balasan yang juga ketarik
+            } else if (lineString.matches(NUMBER_REGEX) || (lineString.length() <= 6 && lineString.endsWith("rb"))) {
+                // ini adalah data jumlah balasan yang juga terbawa ketika proses data collection
                 continue;
-            } else {
+            } else if (sectionLine > 3){
                 if (userComment != null){
                     userComment.getComment().append(lineString);
                 }
@@ -93,31 +97,6 @@ public class DataCollectionParser {
         sc.close();
 
         return results;
-    }
-
-    class UserComment {
-
-        public UserComment(String username, StringBuilder comment) {
-            this.username = username;
-            this.comment = comment;
-        }
-
-        private String username;
-        private StringBuilder comment;
-
-        public String getUsername() {
-            return username;
-        }
-        public void setUsername(String username) {
-            this.username = username;
-        }
-        public StringBuilder getComment() {
-            return comment;
-        }
-        public void setComment(StringBuilder comment) {
-            this.comment = comment;
-        }
-
     }
 
 }
