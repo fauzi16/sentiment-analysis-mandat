@@ -12,7 +12,7 @@ public class DataCollectionToJsonConverter {
     
     public static void main(String[] args) throws IOException {
         String filename = "3";
-        String fileLocation = "../document/text-classification/" + filename  +".txt";
+        String fileLocation = "../document/text-classification/data-collection/" + filename  +".txt";
         DataCollectionParser parser = new DataCollectionParser(fileLocation);
         List<UserComment> userComments = parser.extractInformation();
         
@@ -25,7 +25,7 @@ public class DataCollectionToJsonConverter {
         }
         
         JSONArray array = new JSONArray(userCommentLengthGT100);
-        String fileOutputLocation = "../document/text-classification/lengthGT100/json/" + filename + ".json";
+        String fileOutputLocation = "../document/text-classification/data-collection/lengthGT100/json/" + filename + ".json";
         FileWriter fileWritter = new FileWriter(new File(fileOutputLocation));
         array.write(fileWritter);
         fileWritter.close();

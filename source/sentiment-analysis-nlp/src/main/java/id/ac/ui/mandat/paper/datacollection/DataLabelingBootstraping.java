@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class DataLabelingBootstraping {
 
     public static void main(String[] args) throws IOException {
-        String inputFolder = "../document/text-classification/lengthGT100/json/";
+        String inputFolder = "../document/text-classification/data-collection/lengthGT100/json/";
         String outputFolder = inputFolder + "bootstrap";
         String filename = "1.json";
         String fileLocation = inputFolder + filename;

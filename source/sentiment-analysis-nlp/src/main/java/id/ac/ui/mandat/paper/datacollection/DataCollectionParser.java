@@ -11,7 +11,7 @@ public class DataCollectionParser {
     private static final String NUMBER_REGEX = "\\d+";
 
     public static void main(String[] args) throws FileNotFoundException {
-        String fileLocation = "../document/text-classification/4.txt";
+        String fileLocation = "../document/text-classification/data-collection/4.txt";
         DataCollectionParser parser = new DataCollectionParser(fileLocation);
         List<UserComment> extractInformation = parser.extractInformation();
         int commentThatMoreThan100Char = 0;
