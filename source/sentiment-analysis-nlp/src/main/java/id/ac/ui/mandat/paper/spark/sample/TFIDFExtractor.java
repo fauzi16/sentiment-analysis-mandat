@@ -37,9 +37,8 @@ public class TFIDFExtractor implements Serializable {
                                 .config("spark.master", "local").getOrCreate();
 
                 List<Row> data = Arrays.asList(
-                                RowFactory.create(0.0, "fauzi fauzi fauzi tidak anjing senang"),
-                                RowFactory.create(0.0, "bola suka fauzi"),
-                                RowFactory.create(0.0, "rina suka suka bola"));
+                                RowFactory.create(0.0, "ini adalah sebuah sebuah sampel"),
+                                RowFactory.create(0.0, "ini adalah contoh contoh contoh lainnya lainnya"));
 
                 StructType schema = new StructType(new StructField[] {
                                 new StructField("label", DataTypes.DoubleType, false, Metadata.empty()),

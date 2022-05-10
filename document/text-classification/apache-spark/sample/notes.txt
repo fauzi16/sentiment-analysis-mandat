@@ -1,0 +1,8 @@
+append all document with same class = dn
+dn.removeAlphaNumeric
+dn.tokenize (tokennize and case-fold)
+dn.stopWordRemoval
+dn.ngram(n)
+dn.featureExtraction TF-IDF: (Vector (index of word,probability value))
+dn.trainingNaiveBayes((label, Vector[] feature)[])
+dn.testingNaiveBayesModel()
