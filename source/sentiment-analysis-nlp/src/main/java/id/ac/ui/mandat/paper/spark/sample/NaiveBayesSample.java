@@ -21,6 +21,7 @@ public class NaiveBayesSample {
 
         // create the trainer and set its parameters
         NaiveBayes nb = new NaiveBayes();
+        //nb.set
 
         // train the model
         NaiveBayesModel model = nb.fit(train);

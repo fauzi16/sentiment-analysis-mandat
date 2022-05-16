@@ -34,7 +34,7 @@ public class StopWordRemoval {
         });
 
         Dataset<Row> dataset = spark.createDataFrame(data, schema);
-        remover.transform(dataset).show(false);
+        remover.transform(dataset).show(true);
     }
 
 }
