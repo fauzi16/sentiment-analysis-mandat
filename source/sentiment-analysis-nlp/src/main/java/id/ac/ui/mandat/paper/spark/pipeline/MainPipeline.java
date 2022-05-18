@@ -10,7 +10,7 @@ import org.apache.spark.sql.SparkSession;
 public class MainPipeline {
 
     public void exec() throws IOException {
-        List<DocumentClass> documentClass = LoadDocument.loadDocument();
+        List<DocumentClass> documentClass = LoadDocument.loadDocument2();
         RemoveAlphaNumeric.exec(documentClass);
 
         SparkSession spark = SparkSession.builder().appName("Main Pipeline")
@@ -30,7 +30,9 @@ public class MainPipeline {
         testset.show();
 
         Dataset<Row> naivebayes = NaiveBayesClassifier.exec(trainingset, testset);
-        naivebayes.show();
+        naivebayes.show(false);
+
+        MultiClassEvaluator.exec(naivebayes);
     }
     
     public static void main(String[] args) throws IOException {

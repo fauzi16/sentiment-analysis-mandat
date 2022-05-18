@@ -5,7 +5,7 @@ import java.util.List;
 public class RemoveAlphaNumeric {
 
         
-    public static final String REGEX_NON_ALPHANUMERIC = "^[^a-zA-Z0-9]+$";
+    public static final String REGEX_NON_ALPHANUMERIC = "[^A-Za-z0-9\\s]";
     
     public static void exec(List<DocumentClass> documentClass){
         for (DocumentClass dc : documentClass) {

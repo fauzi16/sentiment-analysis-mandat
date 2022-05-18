@@ -45,6 +45,8 @@ public class StemmingBahasaIndonesia implements Serializable {
             String classification = row.getAs("classification");
             String document = row.getAs("document");
             Double classificationNo = row.getAs("classification_no");
+            String sentiment = row.getAs("sentiment");
+            Double sentimentNo = row.getAs("sentiment_no");
             ArraySeq<String> tokenized = row.getAs("tokenized");
             scala.collection.immutable.List<String> list = tokenized.toList();
             for (int i = 0; i < list.length(); i++) {
@@ -52,7 +54,7 @@ public class StemmingBahasaIndonesia implements Serializable {
                 String lemma = lemmatizer.lemmatize(token);
                 lemmaDocument.add(lemma);
             }
-            Row newRow = RowFactory.create(classification, classificationNo, document, tokenized, lemmaDocument);
+            Row newRow = RowFactory.create(classification, classificationNo, document, sentiment, sentimentNo, tokenized, lemmaDocument);
             results.add(newRow);
         }
 
