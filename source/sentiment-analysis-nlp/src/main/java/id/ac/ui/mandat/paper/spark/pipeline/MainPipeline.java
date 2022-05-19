@@ -1,7 +1,6 @@
 package id.ac.ui.mandat.paper.spark.pipeline;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -10,12 +9,12 @@ import org.apache.spark.sql.SparkSession;
 public class MainPipeline {
 
     public void exec() throws IOException {
-        List<DocumentClass> documentClass = LoadDocument.loadDocument2();
-        RemoveAlphaNumeric.exec(documentClass);
+        LoadDocumentResultHolder holder = LoadDocument.loadDocument();
+        RemoveAlphaNumeric.exec(holder.getDocumentClasses());
 
         SparkSession spark = SparkSession.builder().appName("Main Pipeline")
                                 .config("spark.master", "local").getOrCreate();
-        Dataset<Row> tokenized = Tokenize.execute(spark, documentClass);
+        Dataset<Row> tokenized = Tokenize.execute(spark, holder.getDocumentClasses());
         Dataset<Row> lemmatized = StemmingBahasaIndonesia.exec(spark, tokenized);
 
         Dataset<Row> stopword = StopWordRemoval.exec(lemmatized);
@@ -23,7 +22,7 @@ public class MainPipeline {
         Dataset<Row> ngramm = NGramm.exec(stopword, 1);
         Dataset<Row> tfidf = TFIDF.exec(ngramm, 1);
 
-        Dataset<Row> trainingset = tfidf.sample(0.9);
+        Dataset<Row> trainingset = tfidf.sample(1.0);
         Dataset<Row> testset = tfidf.sample(0.2);
 
         trainingset.show();
@@ -31,8 +30,9 @@ public class MainPipeline {
 
         Dataset<Row> naivebayes = NaiveBayesClassifier.exec(trainingset, testset);
         naivebayes.show(false);
+        naivebayes.select("classification", "classification_no", "probability", "prediction").show(false);
 
-        MultiClassEvaluator.exec(naivebayes);
+        MultiClassEvaluator.exec(naivebayes, holder.getClassPointMap());
     }
     
     public static void main(String[] args) throws IOException {

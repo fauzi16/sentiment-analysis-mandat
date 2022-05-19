@@ -6,9 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -21,15 +22,18 @@ public class LoadDocument {
      * @return
      * @throws IOException
      */
-    public static List<DocumentClass> loadDocument() throws IOException {
+    public static LoadDocumentResultHolder loadDocument() throws IOException {
         List<DocumentClass> documents = new ArrayList<>();
         String fileLocation = "document/text-classification/apache-spark/sample/naive-bayes-text-sample.txt";
         List<String> allLines = Files.readAllLines(Paths.get(fileLocation));
+        Map<String, Double> classPointMap = new LinkedHashMap<String, Double>();
+        classPointMap.put("Computer", 0.0);
+        classPointMap.put("Football", 1.0);
         for (String line : allLines) {
             if(line.isEmpty()) continue;
             int separatorIndex = line.indexOf(",");
             String label = line.substring(0, separatorIndex);
-            Double labelNo = (label.startsWith("C") ? 0.0 : 1.0);
+            Double labelNo = classPointMap.get(label);
             String document = line.substring(separatorIndex, line.length());
 
             DocumentClass documentClass = new DocumentClass();
@@ -38,7 +42,13 @@ public class LoadDocument {
             documentClass.setClassification_no(labelNo);
             documents.add(documentClass);
         }
-        return documents;
+
+        Map<Double, String> classMap = new LinkedHashMap<>();
+        for (Entry<String, Double> classEntry : classPointMap.entrySet()) {
+            classMap.put(classEntry.getValue(), classEntry.getKey());
+        }
+        LoadDocumentResultHolder resultHolder = new LoadDocumentResultHolder(documents, classMap);
+        return resultHolder;
     }
 
     /**
@@ -46,7 +56,7 @@ public class LoadDocument {
      * @return
      * @throws IOException
      */
-    public static List<DocumentClass> loadDocument2() throws IOException {
+    public static LoadDocumentResultHolder loadDocument2() throws IOException {
         List<DocumentClass> documentClasses = new ArrayList<>();
         String[] fileLocations = new String[1];
         fileLocations[0] = "document/text-classification/data-preprocessing/manual-labeling/json/1.json";
@@ -67,14 +77,15 @@ public class LoadDocument {
                     if(dimension == null || sentence == null) continue;
                     DocumentClass documentClass = new DocumentClass();
                     documentClass.setClassification(dimension);
-                    documentClass.setDocument(sentence);
+                    String newLineRemoved = sentence.replace("\\n", " ");
+                    documentClass.setDocument(newLineRemoved);
                     documentClass.setSentiment(sentiment);
                     documentClasses.add(documentClass);
                 }
             }
         }
 
-        Map<String, Double> classPointMap = new HashMap<>();
+        Map<String, Double> classPointMap = new LinkedHashMap<>();
         double lastIndex = -1.0;
         for (DocumentClass documentClass : documentClasses) {
             String classString = documentClass.getClassification();
@@ -82,7 +93,8 @@ public class LoadDocument {
             if(classPointMap.containsKey(classString)) {
                 classPoint = classPointMap.get(classString);
             } else {
-                classPoint = lastIndex++;
+                classPoint = ++lastIndex;
+                classPointMap.put(classString, classPoint);
             }
             documentClass.setClassification_no(classPoint);
             if(documentClass.getSentiment().contains("N")) {
@@ -93,7 +105,12 @@ public class LoadDocument {
             
         }
 
-        return documentClasses;
+        Map<Double, String> classMap = new LinkedHashMap<>();
+        for (Entry<String, Double> classEntry : classPointMap.entrySet()) {
+            classMap.put(classEntry.getValue(), classEntry.getKey());
+        }
+        LoadDocumentResultHolder resultHolder = new LoadDocumentResultHolder(documentClasses, classMap);
+        return resultHolder;
     }
 
 }
