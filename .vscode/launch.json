@@ -58,7 +58,7 @@
             "request": "launch",
             "mainClass": "id.ac.ui.mandat.paper.spark.pipeline.MainPipeline",
             "projectName": "sentiment-analysis-nlp",
-            "vmArgs": "-Xmx10g"
+            "vmArgs": "-Xmx10g -Dhadoop.home.dir=C://Users//fauzi//Documents//Apache//hadoop-3.1.0"
         },
         {
             "type": "java",

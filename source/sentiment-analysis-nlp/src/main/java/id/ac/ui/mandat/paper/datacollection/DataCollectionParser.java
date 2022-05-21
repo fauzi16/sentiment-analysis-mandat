@@ -1,17 +1,17 @@
 package id.ac.ui.mandat.paper.datacollection;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class DataCollectionParser {
 
     private static final String NUMBER_REGEX = "\\d+";
 
-    public static void main(String[] args) throws FileNotFoundException {
-        String fileLocation = "../document/text-classification/data-collection/4.txt";
+    public static void main(String[] args) throws IOException {
+        String fileLocation = "./document/text-classification/data-collection/11.txt";
         DataCollectionParser parser = new DataCollectionParser(fileLocation);
         List<UserComment> extractInformation = parser.extractInformation();
         int commentThatMoreThan100Char = 0;
@@ -19,7 +19,7 @@ public class DataCollectionParser {
         for (UserComment userComment : extractInformation) {
             String comment = userComment.getComment().toString();
             
-            if(comment.length() > 100){
+            if(comment.length() > 50){
                 System.out.println(userComment.getUsername() + " - " + comment);
                 System.out.println();
                 commentThatMoreThan100Char++;
@@ -27,7 +27,7 @@ public class DataCollectionParser {
         }
 
         System.out.println("F. Jumlah data: " + extractInformation.size());
-        System.out.println("G. Jumlah data dengan comment lebih besar dari 100 karakter: " + commentThatMoreThan100Char);
+        System.out.println("G. Jumlah data dengan comment lebih besar dari 50 karakter: " + commentThatMoreThan100Char);
     }
 
     private String fileLocation;
@@ -51,17 +51,16 @@ public class DataCollectionParser {
         return emptyLineStreak >= 2;
     }
 
-    public List<UserComment> extractInformation() throws FileNotFoundException {
+    public List<UserComment> extractInformation() throws IOException {
         List<UserComment> results = new ArrayList<>();
         // pass the path to the file as a parameter
         File file = new File(this.fileLocation);
-        Scanner sc = new Scanner(file);
+        List<String> allLines = Files.readAllLines(file.toPath());
 
         String prevLine = "";
         UserComment userComment = null;
 
-        while (sc.hasNextLine()){
-            String lineString = sc.nextLine();
+        for (String lineString : allLines){
             sectionLine++;
             
             // detecting if this is new section comment
@@ -94,7 +93,6 @@ public class DataCollectionParser {
             prevLine = lineString;
         }
 
-        sc.close();
 
         return results;
     }

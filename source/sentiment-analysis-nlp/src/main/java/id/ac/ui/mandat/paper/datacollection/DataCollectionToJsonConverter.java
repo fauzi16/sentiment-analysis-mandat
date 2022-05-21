@@ -11,21 +11,21 @@ import org.json.JSONArray;
 public class DataCollectionToJsonConverter {
     
     public static void main(String[] args) throws IOException {
-        String filename = "3";
-        String fileLocation = "../document/text-classification/data-collection/" + filename  +".txt";
+        String filename = "11";
+        String fileLocation = "./document/text-classification/data-collection/" + filename  +".txt";
         DataCollectionParser parser = new DataCollectionParser(fileLocation);
         List<UserComment> userComments = parser.extractInformation();
         
         List<UserComment> userCommentLengthGT100 = new ArrayList<>();
         for (UserComment userComment : userComments) {
             String comment = userComment.getComment().toString();
-            if(comment.length() > 100) {
+            if(comment.length() > 50) {
                 userCommentLengthGT100.add(userComment);
             }
         }
         
         JSONArray array = new JSONArray(userCommentLengthGT100);
-        String fileOutputLocation = "../document/text-classification/data-collection/lengthGT100/json/" + filename + ".json";
+        String fileOutputLocation = "./document/text-classification/data-collection/lengthGT100/json/" + filename + ".json";
         FileWriter fileWritter = new FileWriter(new File(fileOutputLocation));
         array.write(fileWritter);
         fileWritter.close();
