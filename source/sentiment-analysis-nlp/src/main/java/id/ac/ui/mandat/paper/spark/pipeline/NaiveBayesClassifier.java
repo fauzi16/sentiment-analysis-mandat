@@ -9,10 +9,10 @@ import org.apache.spark.sql.Row;
 
 public class NaiveBayesClassifier {
     
-    public static Dataset<Row> execTrain(Dataset<Row> trainingset, Dataset<Row> testset, String modelSavedLocation) throws IOException {
+    public static Dataset<Row> execTrain(Dataset<Row> trainingset, Dataset<Row> testset, String modelSavedLocation, String evaluatedColumn) throws IOException {
         NaiveBayes nb = new NaiveBayes();
-        nb.setFeaturesCol("tfidf");
-        nb.setLabelCol("classification_no");
+        nb.setFeaturesCol(ColumnName.TFIDF);
+        nb.setLabelCol(evaluatedColumn);
         // train the model
         NaiveBayesModel model = nb.fit(trainingset);
         if(modelSavedLocation != null) {

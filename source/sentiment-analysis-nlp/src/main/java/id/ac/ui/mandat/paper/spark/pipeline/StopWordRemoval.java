@@ -6,15 +6,30 @@ import org.apache.spark.sql.Row;
 
 import id.ac.ui.mandat.paper.spark.sample.StopWordFactoryBahasa;
 
-public class StopWordRemoval {
+public class StopWordRemoval implements BaseTransformer {
 
-    public static Dataset<Row> exec(Dataset<Row> data) {
-        StopWordsRemover remover = new StopWordsRemover()
-                .setInputCol("lemmatized")
-                .setOutputCol("stopword_removal");
+    private StopWordsRemover remover = new StopWordsRemover();
+
+    public Dataset<Row> exec(Dataset<Row> data) {
+        remover.setOutputCol(ColumnName.STOPWORDREMOVAL);
         remover.setStopWords(StopWordFactoryBahasa.STOP_WORD);
 
         return remover.transform(data);
+    }
+
+    @Override
+    public void setInputColumn(String inputColumn) {
+        remover.setInputCol(inputColumn);
+    }
+
+    @Override
+    public String getInputColumn() {
+        return remover.getInputCol();
+    }
+
+    @Override
+    public String getOutputColumn() {
+        return remover.getOutputCol();
     }
 
 }

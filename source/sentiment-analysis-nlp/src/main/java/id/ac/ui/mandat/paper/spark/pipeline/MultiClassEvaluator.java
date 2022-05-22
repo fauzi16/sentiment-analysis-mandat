@@ -11,11 +11,11 @@ import org.apache.spark.sql.Row;
 
 public class MultiClassEvaluator {
 
-    public static void exec(Dataset<Row> predictions, Map<Double, String> classPointMap) {
+    public static void exec(Dataset<Row> predictions, Map<Double, String> classPointMap, String evaluatedColumn) {
         // compute accuracy on the test set
         MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator()
-                .setLabelCol("classification_no")
-                .setPredictionCol("prediction");
+                .setLabelCol(evaluatedColumn)
+                .setPredictionCol(ColumnName.PREDICTION);
         MulticlassMetrics metrics = evaluator.getMetrics(predictions);
         List<double[]> values = new ArrayList<double[]>();
         for (double label : metrics.labels()) {
@@ -30,7 +30,7 @@ public class MultiClassEvaluator {
             values.add(value);
         }
         System.out.println("-----------------------------------------------");
-        System.out.println("| label, label_no, precision, recall, f-measure|");
+        System.out.println("| label_no, precision, recall, f-measure, label|");
         System.out.println("-----------------------------------------------");
         for (double[] value : values) {
             double labelNo = value[0];

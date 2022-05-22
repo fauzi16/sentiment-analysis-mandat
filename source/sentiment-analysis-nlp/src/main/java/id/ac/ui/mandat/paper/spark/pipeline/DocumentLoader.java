@@ -57,7 +57,7 @@ public class DocumentLoader {
      * @return
      * @throws IOException
      */
-    public static LoadDocumentResultHolder loadDocumentLabeled() throws IOException {
+    public static LoadDocumentResultHolder loadDocumentLabeled(String evaluatedColumn) throws IOException {
         List<DocumentClass> documentClasses = new ArrayList<>();
         String[] fileLocations = new String[1];
         fileLocations[0] = "document/text-classification/data-preprocessing/manual-labeling/json/1.json";
@@ -110,8 +110,13 @@ public class DocumentLoader {
         }
 
         Map<Double, String> classMap = new LinkedHashMap<>();
-        for (Entry<String, Double> classEntry : classPointMap.entrySet()) {
-            classMap.put(classEntry.getValue(), classEntry.getKey());
+        if(evaluatedColumn.equals(ColumnName.CLASSIFICATION_NO)) {
+            for (Entry<String, Double> classEntry : classPointMap.entrySet()) {
+                classMap.put(classEntry.getValue(), classEntry.getKey());
+            }
+        } else {
+            classMap.put(0.0, "Negative");
+            classMap.put(1.0, "Positive");
         }
         LoadDocumentResultHolder resultHolder = new LoadDocumentResultHolder(documentClasses, classMap);
         return resultHolder;

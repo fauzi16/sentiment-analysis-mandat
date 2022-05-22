@@ -85,7 +85,7 @@ public class StopWordFactoryBahasa {
             "seperlunya", "seperti", "sepertinya", "sepihak", "sering", "seringnya", "serta", "serupa", "sesaat",
             "sesama", "sesampai", "sesegera", "sesekali", "seseorang", "sesuatu", "sesuatunya", "sesudah",
             "sesudahnya", "setelah", "setempat", "setengah", "seterusnya", "setiap", "setiba", "setibanya",
-            "setidak-tidaknya", "setidaknya", "setinggi", "seusai", "sewaktu", "siap", "siapa", "siapakah",
+            "setinggi", "seusai", "sewaktu", "siap", "siapa", "siapakah",
             "siapapun", "sini", "sinilah", "soal", "soalnya", "suatu", "sudah", "sudahkah", "sudahlah", "supaya",
             "t", "tadi", "tadinya", "tahu", "tak", "tambah", "tambahnya", "tampak", "tampaknya", "tandas", "tandasnya",
             "tanpa", "tanya", "tanyakan", "tanyanya", "tapi", "tegas", "tegasnya", "telah", "tempat", "tentang",
@@ -93,11 +93,14 @@ public class StopWordFactoryBahasa {
             "tentulah", "tentunya", "tepat", "terakhir", "terasa", "terbanyak", "terdahulu", "terdapat", "terdiri",
             "terhadap", "terhadapnya", "teringat", "teringat-ingat", "terjadi", "terjadilah", "terjadinya", "terkira",
             "terlalu", "terlebih", "terlihat", "termasuk", "ternyata", "tersampaikan", "tersebut", "tersebutlah",
-            "tertentu", "tertuju", "terus", "terutama", "tetap", "tetapi", "tiap", "tiba", "tiba-tiba", "tidak",
-            "tidakkah", "tidaklah", "tiga", "toh", "tuju", "tunjuk", "turut", "tutur", "tuturnya", "u", "ucap",
+            "tertentu", "tertuju", "terus", "terutama", "tetap", "tetapi", "tiap", "tiba", "tiba-tiba", 
+            "tiga", "toh", "tuju", "tunjuk", "turut", "tutur", "tuturnya", "u", "ucap",
             "ucapnya",
             "ujar", "ujarnya", "umumnya", "ungkap", "ungkapnya", "untuk", "usah", "usai", "v", "w", "waduh", "wah",
             "wahai",
-            "waktunya", "walau", "walaupun", "wong", "x", "y", "ya", "yaitu", "yakin", "yakni", "yang", "z" };
+            "waktunya", "walau", "walaupun", "wong", "x", "y", "ya", "yaitu", "yakin", "yakni", "yang", "z"
+            // Negative Prefix for Sentiment Classificaction
+            // ,"setidak-tidaknya", "setidaknya", "tidak", "tidakkah", "tidaklah"
+        };
 
 }

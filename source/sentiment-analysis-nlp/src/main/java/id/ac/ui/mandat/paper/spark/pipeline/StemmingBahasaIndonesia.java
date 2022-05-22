@@ -25,11 +25,13 @@ import scala.collection.mutable.ArraySeq;
 public class StemmingBahasaIndonesia implements Serializable {
 
     private Lemmatizer lemmatizer;
+    
+    private static final String LEMMATIZED_SOURCE = "/root-words.txt";
 
     public Dataset<Row> execute(SparkSession spark, Dataset<Row> data) throws IOException{
         Set<String> dictionary = new HashSet<String>();
 
-        InputStream in = Lemmatizer.class.getResourceAsStream("/root-words.txt");
+        InputStream in = Lemmatizer.class.getResourceAsStream(LEMMATIZED_SOURCE);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
 
         String line;
@@ -42,12 +44,12 @@ public class StemmingBahasaIndonesia implements Serializable {
         List<Row> tokenizedRows = data.collectAsList();
         for (Row row : tokenizedRows) {
             List<String> lemmaDocument = new ArrayList<>();
-            String classification = row.getAs("classification");
-            String document = row.getAs("document");
-            Double classificationNo = row.getAs("classification_no");
-            String sentiment = row.getAs("sentiment");
-            Double sentimentNo = row.getAs("sentiment_no");
-            ArraySeq<String> tokenized = row.getAs("tokenized");
+            String classification = row.getAs(ColumnName.CLASSIFICATION);
+            String document = row.getAs(ColumnName.DOCUMENT);
+            Double classificationNo = row.getAs(ColumnName.CLASSIFICATION_NO);
+            String sentiment = row.getAs(ColumnName.SENTIMENT);
+            Double sentimentNo = row.getAs(ColumnName.SENTIMENT_NO);
+            ArraySeq<String> tokenized = row.getAs(ColumnName.TOKENIZED);
             scala.collection.immutable.List<String> list = tokenized.toList();
             for (int i = 0; i < list.length(); i++) {
                 String token = list.apply(i);
@@ -59,9 +61,8 @@ public class StemmingBahasaIndonesia implements Serializable {
         }
 
         StructType newSchema = data.schema();
-        data.explain();
         newSchema = newSchema.add(new StructField(
-            "lemmatized", DataTypes.createArrayType(DataTypes.StringType), false, Metadata.empty()));
+            ColumnName.LEMMATIZED, DataTypes.createArrayType(DataTypes.StringType), false, Metadata.empty()));
         Dataset<Row> lemmatized = spark.createDataFrame(results, newSchema);
         
         return lemmatized;
