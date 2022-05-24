@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch TopicPipeline",
+            "request": "launch",
+            "mainClass": "id.ac.ui.mandat.paper.spark.pipeline.TopicPipeline",
+            "projectName": "sentiment-analysis-nlp"
+        },
+        {
+            "type": "java",
+            "name": "Launch SentimentPipeline",
+            "request": "launch",
+            "mainClass": "id.ac.ui.mandat.paper.spark.pipeline.SentimentPipeline",
+            "projectName": "sentiment-analysis-nlp"
+        },
+        {
+            "type": "java",
             "name": "Launch LoadDocumentResultHolder",
             "request": "launch",
             "mainClass": "id.ac.ui.mandat.paper.spark.pipeline.LoadDocumentResultHolder",

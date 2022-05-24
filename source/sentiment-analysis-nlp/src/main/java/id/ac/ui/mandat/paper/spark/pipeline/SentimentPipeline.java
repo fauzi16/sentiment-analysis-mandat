@@ -36,9 +36,9 @@ public class SentimentPipeline extends BasePipeline {
 
         NGramm nGramm = new NGramm();
         nGramm.setInputColumn(ColumnName.STOPWORDREMOVAL);
-        Dataset<Row> ngrammResult = nGramm.exec(stopword, 1);
+        Dataset<Row> ngrammResult = nGramm.exec(stopword, 4);
 
-        Dataset<Row> tfidf = TFIDF.exec(ngrammResult, 1);
+        Dataset<Row> tfidf = TFIDF.exec(ngrammResult, 4);
 
         Dataset<Row> trainingset = tfidf.sample(1.0);
         Dataset<Row> testset = tfidf.sample(0.2);
