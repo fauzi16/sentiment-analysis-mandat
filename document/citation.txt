@@ -1,0 +1,78 @@
+
+Intro
+[A010] Setujui Resolusi PBB Soal Krisis Rusia-Ukraina, Indonesia Dinilai Mengekor AS, https://nasional.kompas.com/read/2022/03/03/17070291/setujui-resolusi-pbb-soal-krisis-rusia-ukraina-indonesia-dinilai-mengekor-as?page=all
+[A020] RI Setujui Resolusi PBB Soal Serangan Rusia ke Ukraina, https://www.cnbcindonesia.com/news/20220303090659-4-319734/ri-setujui-resolusi-pbb-soal-serangan-rusia-ke-ukraina
+[A031] Andini, Raiza, “Di Mata Connie Rahakundini, Serangan Putin ke Ukraina Bukan Invasi tapi Peringatan untuk AS dan NATO” RMoL.id, 11 03 2022. [Online]. Available: https://dunia.rmol.id/read/2022/03/11/526442/di-mata-connie-rahakundini-serangan-putin-ke-ukraina-bukan-invasi-tapi-peringatan-untuk-as-dan-nato
+[A040] Melki, M., & Sekeris, P. G. (2019). Media-driven polarization. evidence from the US. Economics, 13(34), 1-13. doi:https://doi.org/10.5018/economics-ejournal.ja.2019-34
+[A050] Grechyna, Daryna, 2016. On The Determinants of Political Polarization. Economics Letter 144, 10-14.
+[A060] Afrimadona, Revisiting Political Polarisation in Indonesia: A Case Study of Jakarta’s Electorate. Journal of Current Southeast Asian Affairs. 2021;40(2):315-339. doi:10.1177/18681034211007490
+[A061] Mietzner M. Populist Anti-Scientism, Religious Polarisation, and Institutionalised Corruption: How Indonesia’s Democratic Decline Shaped Its COVID-19 Response. Journal of Current Southeast Asian Affairs. 2020;39(2):227-249. doi:10.1177/1868103420935561
+[A070] Tornberg, P., Andersson, C., 2021. Modeling The Emergence of Affective Polarization in The Social Media Society. PLoS ONE 16(10): e0258259 
+
+Literature Review
+[B010] Candrakerta, "Sentiment Analysis Based on Appraisal Theory for Assessing Incumbent Electability," in EECSI 2018, Malang, 2018. 
+[B020] E. A. Sukma, "Sentiment Analysis of the New Indonesian Government Policy (Omnibus Law) on Social Media Twitter," in ICIMCIS 2020, Jakarta, 2020.
+[B030] K. Orynbekova, A. Talasbek, A. Omar, A. Bogdanchikov and S. Kadyrov, "MBTI personality classification using Apache Spark," 2021 16th International Conference on Electronics Computer and Computation (ICECCO), 2021, pp. 1-4, doi: 10.1109/ICECCO53203.2021.9663858.
+[B040] Reg:TF-IDF, Comparing Feature Extraction,TF-IDF, LDA, Doc2Vec, #REF_Citation_1
+[B041] Reg: N-Gram Features, E. D. Bintari, Gunawan and A. Indriani, "Classification of News on “Radar” Tarakan Online Using K-Nearest Neighbor Method with N-Gram Features," IOP Conference Series.Materials Science and Engineering, vol. 676, (1), 2019. Available: https://www.proquest.com/scholarly-journals/classification-news-on-radar-tarakan-online-using/docview/2561450485/se-2. DOI: https://doi.org/10.1088/1757-899X/676/1/012008
+[B042] Reg: N-GRAM Al-Shalabi, Riyad and Obeidat, Rasha. (2008). Improving KNN Arabic Text Classification with N-Grams Based Document Indexing. Proceedings of the Sixth International Conference on Informatics and Systems. 
+[B045] Pang, B and Lee L. Opinion mining and sentiment analysis. Foundations and Trends in Information Retrieval, 2008,(1-2),1–135
+[B046] Sentiment Analysis: A Perspective on its Past, Present and Future, Akshi Kumar, Teeja Mary Sebastian, 2012
+
+
+[B050] Lecture 26 — Formalizing the Naive Bayes Classifier — [ NLP || Dan Jurafsky || Stanford ], https://www.youtube.com/watch?v=RftMipEbL48&list=PLLssT5z_DsK8HbD2sPcUIDfQ7zmBarMYv&index=26
+[B060] A. Ng and M. Jordan “On Discriminative vs. Generative classifiers: A comparison of logistic regression and naïve Bayes”, NIPS 2002.
+[B070] Lecture 32 — Practical Issues in Text Classification— [ NLP || Dan Jurafsky || Stanford University ], https://www.youtube.com/watch?v=LmR_rXzf1rs&list=PLLssT5z_DsK8HbD2sPcUIDfQ7zmBarMYv&index=32
+[B080] Wang, Yige. (2017). Advanced Naïve Bayes Algorithm Design with Part-of-Speech Tagger on Sentiment Analysis. 1382-1385. 10.1109/ICCSEC.2017.8446798. 
+[B090] Reg:TF-IDF, Robertson, S. (2004), "Understanding inverse document frequency: on theoretical arguments for IDF", Journal of Documentation, Vol. 60 No. 5, pp. 503-520. https://remote-lib.ui.ac.id:2075/10.1108/00220410410560582
+
+
+[B120] Sentence boundary disambiguation for Indonesian language, Syopiansyah Jaya Putra. et. Al, 2017 https://www.researchgate.net/publication/323096371_Sentence_boundary_disambiguation_for_Indonesian_language
+[B130] Rule based sentence segmentation of Indonesian language, Suwanto Raharjo. Et. Al., 2018. https://www.researchgate.net/publication/329250329_Rule_based_sentence_segmentation_of_Indonesian_language
+[B140] #REF_Citation_2, Reg: The Sentence Segmentation option using the machine learning approach
+[B150] Reg:remove duplicate token, Lecture 34 — Sentiment Analysis A baseline algorithm— [ NLP || Dan Jurafsky || Stanford University], https://www.youtube.com/watch?v=SFas7ml82NI&list=PLLssT5z_DsK8HbD2sPcUIDfQ7zmBarMYv&index=34
+[B160] [B161] Reg:Adding a token prefix for words whose position after the negation, #REF_Citation_3, #REF_Citation_4
+[B180] Reg:Sastrawi, D. Z. Abidin, S. Nurmaini, R. F. Malik, Jasmir, E. Rasywir and Y. Pratama, "A Model of Preprocessing For Social Media Data Extraction," 2019 International Conference on Informatics, Multimedia, Cyber and Information System (ICIMCIS), 2019, pp. 67-72, doi: 10.1109/ICIMCIS48181.2019.8985192.
+[B181] Reg:Sastrawi, https://github.com/sastrawi/sastrawi
+[B190] Reg:the Precision, Recall, and F-Measure, Lecture 30 — Precision, Recall, and the F measure — [ NLP || Dan Jurafsky || Stanford University ], https://www.youtube.com/watch?v=jrAyRCa7aY8&list=PLLssT5z_DsK8HbD2sPcUIDfQ7zmBarMYv&index=30
+[B191] https://spark.apache.org/docs/2.2.0/mllib-evaluation-metrics.html, Evaluation Metrics - Classification model evaluation.
+
+
+
+#REF_Citation_1
+Donghwa Kim, Deokseong Seo, Suhyoun Cho, Pilsung Kang,
+Multi-co-training for document classification using various document representations: TF–IDF, LDA, and Doc2Vec,
+Information Sciences,
+Volume 477,
+2019,
+Pages 15-29,
+ISSN 0020-0255,
+https://doi.org/10.1016/j.ins.2018.10.006.
+(https://www.sciencedirect.com/science/article/pii/S0020025518308028)
+
+#REF_Citation_2
+Dogan Dalva, Umit Guz, Hakan Gurkan,
+Effective semi-supervised learning strategies for automatic sentence segmentation,
+Pattern Recognition Letters,
+Volume 105,
+2018,
+Pages 76-86,
+ISSN 0167-8655,
+https://doi.org/10.1016/j.patrec.2017.10.010.
+(https://www.sciencedirect.com/science/article/pii/S0167865517303720)
+
+#REF_Citation_3
+- Das, Sanjiv and Mike Chen 2001. Yahoo! for Amazon: Extracting marketing sentiment from stock message board. In proceedings of the asia pasific finance association annual conference (APFA).
+#REF_Citation_4
+- Bo Pang, Lillian Lee, and Shivakumar Vaithayanathan. 2002. Thumbs up? Sentiment Classification using Machine Learning Techniques. EMNLP-2002, 79-86
+
+
+
+Additional Information:
+1. Binary (Multinomial Naive Bayes with Boolean Feature) works better than full word counts for Feature Extraction. 
+Reference:
+- Bo Pang, Lillian Lee, and Shivakumar Vaithayanathan. 2002. Thumbs up? Sentiment Classification using Machine Learning Techniques. EMNLP-2002, 79-86
+- V. Metsis, I. Androutsopoulos, G. Paliouras. 2006. Spam Filtering with Naive Bayes - Which naive Bayes ? CEAS 2006 - Third Conference on Email and Anti-Spam.
+- K.-M Schneider, 2004. On word frequnecy information and negative evidence in Naive Bayes text classification. ICANLP, 474-485.
+- JD Rennie, L Shih, J Teevan. 2003. Tackling the poor assumptions of naive bayes text classifiers. ICML 2003
+

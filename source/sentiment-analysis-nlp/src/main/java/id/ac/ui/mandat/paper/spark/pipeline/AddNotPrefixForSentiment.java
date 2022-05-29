@@ -4,69 +4,61 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.RowFactory;
-import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.types.StructType;
+import org.apache.spark.sql.functions;
+import org.apache.spark.sql.expressions.UserDefinedFunction;
+import org.apache.spark.sql.types.DataTypes;
 
-import scala.collection.mutable.ArraySeq;
+import scala.collection.immutable.ArraySeq;
 
 public class AddNotPrefixForSentiment implements BaseTransformer {
 
-    public Dataset<Row> exec(SparkSession spark, Dataset<Row> data) throws IOException{
-        List<Row> results = new ArrayList<>();
-        List<Row> tokenizedRows = data.collectAsList();
-        for (Row row : tokenizedRows) {
+    private String inputColumn;
+    /**
+     * 
+     * @param spark
+     * @param data
+     * @return
+     * @throws IOException
+     */
+    public Dataset<Row> exec(Dataset<Row> data) {
+        data = data.withColumn(ColumnName.NEGETION_PERFIX, data.col(this.inputColumn));
+        UserDefinedFunction udf = functions.udf((ArraySeq<String> v1) -> {
             List<String> withPrefixWithNegToken = new ArrayList<>();
-            String classification = row.getAs(ColumnName.CLASSIFICATION);
-            String document = row.getAs(ColumnName.DOCUMENT);
-            Double classificationNo = row.getAs(ColumnName.CLASSIFICATION_NO);
-            String sentiment = row.getAs(ColumnName.SENTIMENT);
-            Double sentimentNo = row.getAs(ColumnName.SENTIMENT_NO);
-            ArraySeq<String> tokenized = row.getAs(ColumnName.TOKENIZED);
-            scala.collection.immutable.List<String> list = tokenized.toList();
             boolean isNegative = false;
-            for (int i = 0; i < list.length(); i++) {
-                String token = list.apply(i);
-                if(isNegative) {
-                    token = "tidak_" + token;
-                } else if (token.equals("tidak") || token.equals("tdk")){
+            for (int i = 0; i < v1.size(); i++) {
+                String token = v1.apply((Integer)i);
+                
+                if (token.equals("tidak") || token.equals("tdk")){
                     isNegative = true;
+                } if(isNegative) {
+                    token = "tidak_" + token;
                 }
                 withPrefixWithNegToken.add(token);
             }
-            Row newRow = RowFactory.create(classification, classificationNo, document, sentiment, sentimentNo, withPrefixWithNegToken);
-            results.add(newRow);
-        }
-
-        StructType newSchema = data.schema();
-        Dataset<Row> removedDuplcates = spark.createDataFrame(results, newSchema);
-        
-        return removedDuplcates;
+            return withPrefixWithNegToken;
+        }, DataTypes.createArrayType(DataTypes.StringType)); 
+        Column negationPrexifColumn = udf.apply(data.col(ColumnName.NEGETION_PERFIX));
+        data = data.withColumn(ColumnName.NEGETION_PERFIX, negationPrexifColumn);
+        return data;
     }
 
-    @Deprecated
+
+    @Override
     public void setInputColumn(String inputColumn) {
-        throw new RuntimeException();
+        this.inputColumn = inputColumn;
     }
 
     @Deprecated
     public String getInputColumn() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.inputColumn;
     }
 
-    @Deprecated
+    @Override
     public String getOutputColumn() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Deprecated
-    public Dataset<Row> exec(Dataset<Row> param) {
-        // TODO Auto-generated method stub
-        return null;
+        return ColumnName.NEGETION_PERFIX;
     }
     
 }

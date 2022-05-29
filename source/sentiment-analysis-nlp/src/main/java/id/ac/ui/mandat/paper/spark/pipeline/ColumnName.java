@@ -9,6 +9,7 @@ public class ColumnName {
     public static final String DOCUMENT = "document";
     public static final String TOKENIZED = "tokenized";
     public static final String DUPLICATE_REMOVED = "duplicate_removed";
+    public static final String NEGETION_PERFIX = "negation_prefix";
     public static final String LEMMATIZED = "lemmatized";
     public static final String STOPWORDREMOVAL = "stopword_removal";
     

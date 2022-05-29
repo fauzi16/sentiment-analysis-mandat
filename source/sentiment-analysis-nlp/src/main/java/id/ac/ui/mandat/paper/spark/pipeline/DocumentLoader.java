@@ -60,7 +60,7 @@ public class DocumentLoader {
     public static LoadDocumentResultHolder loadDocumentLabeled(String evaluatedColumn) throws IOException {
         List<DocumentClass> documentClasses = new ArrayList<>();
         String[] fileLocations = new String[1];
-        fileLocations[0] = "document/text-classification/data-preprocessing/manual-labeling/json/1.json";
+        fileLocations[0] = "document/text-classification/data-preprocessing/manual-labeling/json/1-modified.json";
         for (String fileLocation : fileLocations) {
             String jsonFile = FileUtils.readFileToString(new File(fileLocation), StandardCharsets.UTF_8);
             JSONArray array = new JSONArray(jsonFile);
@@ -125,7 +125,10 @@ public class DocumentLoader {
     public static LoadDocumentResultHolder loadDocumentUnlabeled() throws IOException {
         List<DocumentClass> documentClasses = new ArrayList<>();
         List<String> fileLocations = new ArrayList<>();
-        fileLocations.add("document/text-classification/data-collection/lengthGt100/json/4.json");
+        fileLocations.add("document/text-classification/data-collection/lengthGt100/json/1.json");
+        fileLocations.add("document/text-classification/data-collection/lengthGt100/json/2.json");
+        fileLocations.add("document/text-classification/data-collection/lengthGt100/json/3.json");
+        fileLocations.add("document/text-classification/data-collection/lengthGt100/json/4.json"); // remove bias ibu connie
         fileLocations.add("document/text-classification/data-collection/lengthGt100/json/5.json");
         fileLocations.add("document/text-classification/data-collection/lengthGt100/json/6.json");
         fileLocations.add("document/text-classification/data-collection/lengthGt100/json/7.json");

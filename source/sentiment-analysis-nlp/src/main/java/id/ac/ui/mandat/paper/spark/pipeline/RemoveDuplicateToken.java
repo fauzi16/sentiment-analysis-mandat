@@ -4,60 +4,60 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.spark.sql.Column;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.RowFactory;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.types.StructType;
+import org.apache.spark.sql.functions;
+import org.apache.spark.sql.expressions.UserDefinedFunction;
+import org.apache.spark.sql.types.DataTypes;
 
-import scala.collection.mutable.ArraySeq;
+import scala.collection.immutable.ArraySeq;
 
 
 public class RemoveDuplicateToken implements BaseTransformer {
 
+    private String inputColumn;
+
+    /**
+     * 
+     * @param spark
+     * @param data
+     * @return
+     * @throws IOException
+     */
     public Dataset<Row> exec(SparkSession spark, Dataset<Row> data) throws IOException{
-        List<Row> results = new ArrayList<>();
-        List<Row> tokenizedRows = data.collectAsList();
-        for (Row row : tokenizedRows) {
+        data = data.withColumn(ColumnName.DUPLICATE_REMOVED, data.col(this.inputColumn));
+        UserDefinedFunction udf = functions.udf((ArraySeq<String> v1) -> {
             List<String> removedDuplcates = new ArrayList<>();
-            String classification = row.getAs(ColumnName.CLASSIFICATION);
-            String document = row.getAs(ColumnName.DOCUMENT);
-            Double classificationNo = row.getAs(ColumnName.CLASSIFICATION_NO);
-            String sentiment = row.getAs(ColumnName.SENTIMENT);
-            Double sentimentNo = row.getAs(ColumnName.SENTIMENT_NO);
-            ArraySeq<String> tokenized = row.getAs(ColumnName.TOKENIZED);
-            scala.collection.immutable.List<String> list = tokenized.toList();
-            for (int i = 0; i < list.length(); i++) {
-                String token = list.apply(i);
-                if(!removedDuplcates.contains(token)) {
+            for (int i = 0; i < v1.size(); i++) {
+                String token = v1.apply((Integer) i);
+
+                if(!removedDuplcates.contains(token) && !token.isEmpty()) {
                     removedDuplcates.add(token);
                 }
             }
-            Row newRow = RowFactory.create(classification, classificationNo, document, sentiment, sentimentNo, removedDuplcates);
-            results.add(newRow);
-        }
-
-        StructType newSchema = data.schema();
-        Dataset<Row> removedDuplcates = spark.createDataFrame(results, newSchema);
+            return removedDuplcates;
+        }, DataTypes.createArrayType(DataTypes.StringType)); 
+        Column removeDuplicateColumn = udf.apply(data.col(ColumnName.DUPLICATE_REMOVED));
+        data = data.withColumn(ColumnName.DUPLICATE_REMOVED, removeDuplicateColumn);
         
-        return removedDuplcates;
+        return data;
     }
 
-    @Deprecated
+    @Override
     public void setInputColumn(String inputColumn) {
-        throw new RuntimeException();
+        this.inputColumn = inputColumn;
     }
 
-    @Deprecated
+    @Override
     public String getInputColumn() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.inputColumn;
     }
 
-    @Deprecated
+    @Override
     public String getOutputColumn() {
-        // TODO Auto-generated method stub
-        return null;
+        return ColumnName.DUPLICATE_REMOVED;
     }
 
     @Deprecated
